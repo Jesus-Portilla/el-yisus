@@ -1,0 +1,117 @@
+<style>
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #b9b9b9;
+    padding: 7px;
+    text-align: left;
+  }
+
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .input-group .input-group-text {
+    align-self: flex-start;
+  }
+
+  .table th {
+    vertical-align: middle;
+  }
+</style>
+
+<div class="container mt-5">
+  <div class="row">
+    <form [formGroup]="form" (submit)="agregarEstudiante()">
+      <div class="input-group">
+        <span class="input-group-text my-icon" style="height: 38px;"><i class="bi bi-person-fill"></i></span>
+        <input type="text" formControlName="nombre" class="form-control form-control-lg" placeholder="Nombre">
+        <input type="text" formControlName="apellido" class="form-control form-control-lg" placeholder="Apellido">
+      </div>
+      <div class="input-group">
+        <input type="date" formControlName="fecha" class="form-control form-control-lg" placeholder="Fecha de nacimiento">
+        <input type="text" formControlName="cedula" class="form-control form-control-lg" placeholder="Cédula">
+      </div>
+      <div class="input-group">
+        <input type="text" formControlName="asignatura" class="form-control form-control-lg" placeholder="Asignatura">
+        <input type="number" formControlName="nota1" class="form-control form-control-lg" step="0.1" placeholder="Nota 1">
+      </div>
+      <div class="input-group">
+        <input type="number" formControlName="nota2" class="form-control form-control-lg" step="0.1" placeholder="Nota 2">
+        <button class="btn btn-primary" type="submit">Agregar</button>
+      </div>
+    </form>
+
+    <div class="col-lg-6 offset-lg-3 mt-3">
+      <div *ngIf="listEstudiante.length === 0" class="card p-2">
+        <h6>No hay Estudiantes registrados</h6>
+      </div>
+
+      <div class="input-group">
+        <label for="filtro" class="input-group-text">Filtrar por:</label>
+        <select class="form-select form-select-lg" id="filtro" [(ngModel)]="filtro" (change)="filtrarEstudiantes()">
+          <option value="Todos">Todos</option>
+          <option value="Aprobados">Aprobados</option>
+          <option value="Reprobados">Reprobados</option>
+        </select>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th id="th-nombre" style="vertical-align: middle;">Nombres</th>
+            <th id="th-apellido" style="vertical-align: middle;">Apellidos</th>
+            <th id="th-fecha" style="vertical-align: middle;">Fecha de Nacimiento</th>
+            <th id="th-cedula" style="vertical-align: middle;">Cédula</th>
+            <th id="th-asignatura" style="vertical-align: middle;">Asignatura</th>
+            <th id="th-nota1" style="vertical-align: middle;">Nota 1</th>
+            <th id="th-nota2" style="vertical-align: middle;">Nota 2</th>
+            <th id="th-promedio" style="vertical-align: middle;">Promedio</th>
+            <th id="th-estado" style="vertical-align: middle;">Estado</th>
+            <th id="th-eliminar" style="vertical-align: middle;">Eliminar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let estudiante of filteredListEstudiante; let i=index">
+            <td>{{estudiante.nombre}}</td>
+            <td>{{estudiante.apellido}}</td>
+            <td>{{estudiante.fecha}}</td>
+            <td>{{estudiante.cedula}}</td>
+            <td>{{estudiante.asignatura}}</td>
+            <td>{{estudiante.nota1}}</td>
+            <td>{{estudiante.nota2}}</td>
+            <td>{{estudiante.promedio}}</td>
+            <td>
+              <span [ngClass]="estudiante.promedio >= 7 ? 'text-success' : 'text-danger'">
+                {{estudiante.promedio >= 7 ? 'Aprobado' : 'Reprobado'}}
+              </span>
+            </td>
+            <td>
+              <span class="cursor text-danger" (click)="eliminarEstudiante(i)">
+                <i class="bi bi-x-circle-fill"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>        
+      </table>
+    </div>
+  </div>
+</div>
+
+<button class="btn btn-primary" (click)="navegarAPromedioTotal()">Ver Promedio Total</button>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p>JESUS PORTILLA</p>
+        <p>SOF-S-VE-7-3</p>
+      </div>
+    </div>
+  </div>
+</footer>

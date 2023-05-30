@@ -1,0 +1,29 @@
+<h2>Galería/Fotografías</h2>
+<!-- Controles de Angular Material -->
+<mat-form-field>
+  <mat-label>Input</mat-label>
+  <input matInput placeholder="Placeholder" />
+</mat-form-field>
+
+<mat-checkbox>Checkbox</mat-checkbox>
+
+<mat-form-field>
+  <mat-label>Fecha</mat-label>
+  <input matInput [matDatepicker]="picker" placeholder="Seleccione una fecha" />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-card>
+  <mat-card-content>
+    Contenido de la tarjeta
+  </mat-card-content>
+</mat-card>
+
+<mat-list>
+  <mat-list-item>Elemento de lista 1</mat-list-item>
+  <mat-list-item>Elemento de lista 2</mat-list-item>
+  <mat-list-item>Elemento de lista 3</mat-list-item>
+</mat-list>
+
+<!-- Otros elementos específicos de la página 1 -->
